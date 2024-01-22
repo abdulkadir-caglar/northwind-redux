@@ -5,19 +5,24 @@ import * as categoryActions from "../../redux/actions/categoryActions"
 import { ListGroup, ListGroupItem } from 'reactstrap';
 
 class CategoryList extends Component {
-    componentDidMount(){
+    componentDidMount() {
         this.props.actions.getCategories();
     }
 
+    selectCategory = (category) => {
+        this.props.actions.changeCategory(category)
+    }
+
     render() {
-        console.log("Categories:", this.props.categories);
-        console.log("Category Name: " + this.props.currentCategory.categoryName)
         return (
             <div>
                 <h3>Categories {this.props.categories.length}</h3>
                 <ListGroup>
                     {this.props.categories.map(category => (
-                        <ListGroupItem onClick={this.props.actions.changeCategory(category)} key= {category.id}>
+                        <ListGroupItem
+                            active={category.id === this.props.currentCategory.id}
+                            onClick={() => this.selectCategory(category)}
+                            key={category.id}>
                             {category.categoryName}
                         </ListGroupItem>
                     ))}
@@ -28,18 +33,19 @@ class CategoryList extends Component {
     }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
     return {
-        currentCategory:state.changeCategoryReducer,
-        categories:state.categoryListReducer
+        currentCategory: state.changeCategoryReducer,
+        categories: state.categoryListReducer
     }
 }
 
-function mapDispatchToProps(dispatch){
-    return{
-        actions:{
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: {
             getCategories: bindActionCreators(categoryActions.getCategories, dispatch),
             changeCategory: bindActionCreators(categoryActions.changeCategory, dispatch)
+
         }
     }
 }
