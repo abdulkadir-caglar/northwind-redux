@@ -1,4 +1,4 @@
 export default {
-    currentCategory:{categoryName:"Beverages"},
+    currentCategory:{},
     categories:[]
 }
