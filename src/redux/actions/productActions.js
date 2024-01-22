@@ -7,9 +7,12 @@ export function getProductsSuccess(products) {
     }
 }
 
-export function getProducts() {
+export function getProducts(categoryId) {
     return async function (dispatch) {
         let url = "http://localhost:3000/products"
+        if(categoryId){
+            url = url + "?categoryId=" + categoryId;
+        }
         return fetch(url)
             .then(response => response.json())
             .then(result => dispatch(getProductsSuccess(result)))
