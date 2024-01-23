@@ -18,6 +18,10 @@ export default function cartReducer(state = initialState.cart, action) {
             }
             break;
 
+        case actionTypes.REMOVE_FROM_CART:
+            const newState2 = state.filter(c => c.product.id !== action.payload.id)
+            return newState2;    
+
         default:
             return state;
     }
