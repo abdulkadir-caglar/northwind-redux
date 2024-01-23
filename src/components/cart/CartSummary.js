@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Badge, DropdownItem, DropdownMenu, DropdownToggle, NavItem, NavLink, UncontrolledDropdown } from 'reactstrap';
 import { bindActionCreators } from 'redux';
 import * as cartActions from '../../redux/actions/cartActions';
+import { Link } from 'react-router-dom';
 
 class CartSummary extends Component {
 
@@ -31,7 +32,9 @@ class CartSummary extends Component {
                         ))
                     }
                     <DropdownItem divider />
-                    <DropdownItem>Reset</DropdownItem>
+                    <DropdownItem>
+                        <Link to={"/cart"}>Go To Cart</Link>
+                    </DropdownItem>
                 </DropdownMenu>
             </UncontrolledDropdown>
         )
